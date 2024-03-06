@@ -3505,3 +3505,60 @@ details-disclosure > details {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+
+
+/***************
+ * CUSTOM CODE *
+ ***************/
+
+/* RESPONSIVENESS */
+@media screen and (max-width: 767px) {
+  .not_mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .not_tablet {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .not_desktop {
+    display: none !important;
+  }
+}
+
+/* ASPECT RATIOS */
+.aspect-ratio {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  aspect-ratio: var(--aspect-ratio);
+}
+
+.aspect-ratio > img, .aspect-ratio > svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* EFFECTS */
+@media screen and (min-width: 1024px) {
+  .is_rounded {
+    overflow: hidden;
+    border-top-right-radius: 30% 50%;
+    border-bottom-right-radius: 30% 50%;
+  }
+
+  .is_rounded.is_rounded_reversed {
+    border-top-left-radius: 30% 50%;
+    border-bottom-left-radius: 30% 50%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

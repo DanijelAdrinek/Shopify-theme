@@ -1,0 +1,34 @@
+/**********
+ * MOBILE *
+ **********/
+
+.image_plus_text {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+}
+
+/* IMAGE */
+
+/* TEXT */
+
+.image_plus_text--textContainer {
+    text-align: center;
+}
+
+/***********
+ * DESKTOP *
+ ***********/
+
+@media screen and (min-width: 1025px) {
+
+    .image_plus_text {
+        flex-direction: row;
+    }
+
+    .image_plus_text--textContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
