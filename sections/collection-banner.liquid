@@ -27,10 +27,9 @@
 
 %}
 
-{% comment %} LIQUID {% endcomment %}
 <div class="banner--contentContainer color-{{ section.settings.color_scheme }}">
 
-    <div class="banner--imageContainer aspect-ratio" style="--aspect-ratio: {% if imageAspectRatio == true and featuredImage != blank %} {{ featuredImage.aspect_ratio }} {% else %} 1 {% endif %};">
+    <div class="banner--imageContainer scroll-trigger animate--slide-in aspect-ratio" style="--aspect-ratio: {% if imageAspectRatio == true and featuredImage != blank %} {{ featuredImage.aspect_ratio }} {% else %} 1 {% endif %};">
     
         {% if featuredImage %}
             {{ 
@@ -50,21 +49,21 @@
 
         <div class="banner--textAndButtonContainer">
             {% if title != blank %}
-                <h1 class="banner--header banner--color">{{ title }}</h1>
+                <h1 class="banner--header banner--color scroll-trigger animate--slide-in">{{ title }}</h1>
             {% endif %}
 
             {% if description != blank %}
-                <div class="not_mobile banner--color">
+                <div class="not_mobile banner--color scroll-trigger animate--slide-in">
                     {{ description }}
                 </div>
-                <div class="not_tablet not_desktop text-center banner--color">
+                <div class="not_tablet not_desktop text-center banner--color scroll-trigger animate--slide-in">
                     {{ description | truncate: 150, '...' }}
                 </div>
             {% endif %}
 
             {% if url != blank and buttonText != blank %}
                 
-                {% render 'custom-buttons', text: buttonText, url: url, background-color: buttonBackground %}
+                {% render 'custom-buttons', classes: "scroll-trigger animate--slide-in", text: buttonText, url: url, background-color: buttonBackground %}
 
             {% endif %}
         </div>
