@@ -1,0 +1,13 @@
+{% comment %} 
+    PROPERTIES:
+        text,
+        url,
+        classes,
+        size - [xs, small, medium, large, xl],
+        color,
+        background-color
+{% endcomment %}
+
+<a href="{{ url }}" class="btn btn-primary {{ size }} {{ classes }}" style="{% if color != blank %} color:{{ color }}; {% endif %}{% if background-color != blank %} background-color: {{ background-color }}{% endif %} {% if color %} border:1px solid {{ color }};{% endif %}">
+    {{ text }}
+</a>

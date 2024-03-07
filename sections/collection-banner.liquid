@@ -1,0 +1,158 @@
+{{ 'collection-banner.css' | asset_url | stylesheet_tag }}
+
+{% assign selectedCollection = section.settings.collection %}
+    
+{% liquid 
+
+    assign imageAspectRatio = section.settings.bannerImageAspectRatio
+    assign buttonText = section.settings.bannerButtonText
+    assign buttonBackground = section.settings.bannerButtonColor
+    assign overlay = section.settings.overlay
+
+    if selectedCollection != blank
+
+        assign featuredImage = selectedCollection.featured_image
+        assign url = selectedCollection.url
+        assign title = selectedCollection.title
+        assign description = selectedCollection.description
+
+    else
+        
+        assign featuredImage = section.settings.bannerImage
+        assign url = section.settings.bannerURL
+        assign title = section.settings.bannerHeading
+        assign description = section.settings.bannerDescription
+
+    endif
+
+%}
+
+{% comment %} LIQUID {% endcomment %}
+<div class="banner--contentContainer color-{{ section.settings.color_scheme }}">
+
+    <div class="banner--imageContainer aspect-ratio" style="--aspect-ratio: {% if imageAspectRatio == true and featuredImage != blank %} {{ featuredImage.aspect_ratio }} {% else %} 1 {% endif %};">
+    
+        {% if featuredImage %}
+            {{ 
+                featuredImage
+                | image_url: width: '1500'
+                | image_tag: width: '200, 400, 700, 1000, 1300', alt: featuredImage.alt, loading: 'lazy'
+            }}
+        {% else %}
+
+            {{ 'collection-1' | placeholder_svg_tag: '' }}
+
+        {% endif %}
+
+        {% if overlay == true %}
+            <div class="overlay"></div>
+        {% endif %}
+
+        <div class="banner--textAndButtonContainer">
+            {% if title != blank %}
+                <h1 class="banner--header banner--color">{{ title }}</h1>
+            {% endif %}
+
+            {% if description != blank %}
+                <div class="not_mobile banner--color">
+                    {{ description }}
+                </div>
+                <div class="not_tablet not_desktop text-center banner--color">
+                    {{ description | truncate: 150, '...' }}
+                </div>
+            {% endif %}
+
+            {% if url != blank and buttonText != blank %}
+                
+                {% render 'custom-buttons', text: buttonText, url: url, background-color: buttonBackground %}
+
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+{% schema %}
+{
+    "name": "Banner",
+    "settings": [
+        {
+            "id": "collection",
+            "type": "collection",
+            "label": "Pick collection"
+        },
+        {
+            "id": "bannerImageAspectRatio",
+            "type": "checkbox",
+            "label": "Keep image aspect ratio?",
+            "default": true,
+            "info": "Keep image aspect ratio instead of assigning a aspect ratio of 1.5"
+        },
+        {
+            "id": "overlay",
+            "type": "checkbox",
+            "label": "Overlay",
+            "default": true,
+            "info": "Adds overlay to the image"
+        },
+        {
+            "type": "paragraph",
+            "content": "button"
+        },
+        {
+            "id": "bannerButtonText",
+            "type": "text",
+            "label": "Text",
+            "default": "See collection"
+        },
+        {
+            "id": "bannerButtonColor",
+            "type": "color",
+            "label": "Color",
+            "default": "#008000"
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
+        },
+        {
+            "type": "header",
+            "content": "Custom image and text"
+        },
+        {
+            "id": "bannerURL",
+            "type": "url",
+            "label": "URL"
+        },
+        {
+            "id": "bannerImage",
+            "type": "image_picker",
+            "label": "Image"
+        },
+        {
+            "type": "paragraph",
+            "content": "Text"
+        },
+        {
+            "id": "bannerHeading",
+            "type": "text",
+            "label": "Heading",
+            "default": "Your amazing collection"
+        },
+        {
+            "id": "bannerDescription",
+            "type": "richtext",
+            "label": "Text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor auctor purus, sit amet aliquet diam convallis id. Fusce scelerisque ne</p>"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Banner"
+        }
+    ]
+}
+{% endschema %}
