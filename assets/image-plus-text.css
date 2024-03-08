@@ -10,10 +10,13 @@
 
 /* IMAGE */
 
+.image_plus_text--imageContainer > svg > path { fill: rgb(var(--color-foreground)); }
+
 /* TEXT */
 
 .image_plus_text--textContainer {
     text-align: center;
+    color: rgb(var(--color-foreground));
 }
 
 /***********

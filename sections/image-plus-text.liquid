@@ -1,47 +1,56 @@
 {{ 'image-plus-text.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width image_plus_text--container">
+<div class="color-{{ section.settings.color_scheme }}">
+    <div class="page-width image_plus_text--container">
 
-    {% for block in section.blocks %}
-        {% if block.type == "image_plus_text" %}
-
-            {% assign blockImage = block.settings.image %}
-            {% assign blockOrder = block.settings.order %}
-
-            <div class="image_plus_text">
-                    <div class="image_plus_text--imageContainer aspect-ratio scroll-trigger animate--slide-in {% if block.settings.make_image_rounded == true %}is_rounded{% endif %} {% if blockOrder == false %}is_rounded_reversed{% endif %}" style="{% if blockOrder == false %}order: 2;{% endif %} --aspect-ratio: {% if blockImage != blank %} {{ blockImage.aspect_ratio }}; {% else %} 1.5; {% endif %}">
-
-                        {% if blockImage != blank %}
-
-                            {{ 
-                                blockImage
-                                | image_url: width: '1500'
-                                | image_tag: width: '200, 400, 700, 1000, 1300', alt: blockImage.alt, loading: 'lazy'
-                            }}
+        {% for block in section.blocks %}
+            {% if block.type == "image_plus_text" %}
+            
+                {% assign blockImage = block.settings.image %}
+                {% assign blockOrder = block.settings.order %}
+            
+                <div class="image_plus_text">
+                        <div class="image_plus_text--imageContainer aspect-ratio scroll-trigger animate--slide-in {% if block.settings.make_image_rounded == true %}is_rounded{% endif %} {% if blockOrder == false %}is_rounded_reversed{% endif %}" style="{% if blockOrder == false %}order: 2;{% endif %} --aspect-ratio: {% if blockImage != blank %} {{ blockImage.aspect_ratio }}; {% else %} 1.5; {% endif %}">
                         
-                        {% else %}
-
-                            {{ 'product-1' | placeholder_svg_tag }}
-
-                        {% endif %}
+                            {% if blockImage != blank %}
+                            
+                                {{ 
+                                    blockImage
+                                    | image_url: width: '1500'
+                                    | image_tag: width: '200, 400, 700, 1000, 1300', alt: blockImage.alt, loading: 'lazy'
+                                }}
+                            
+                            {% else %}
+                            
+                                {{ 'product-1' | placeholder_svg_tag }}
+                            
+                            {% endif %}
+                        
+                        </div>
                     
-                    </div>
-
-
-                <div class="image_plus_text--textContainer scroll-trigger animate--slide-in" style="--animation-order: 1; {% if blockOrder == false %}order: 1;{% endif %}">{{ block.settings.text }}</div>
-
-            </div>
-
-        {% endif %}
-
-    {% endfor %}
-
+                    
+                    <div class="image_plus_text--textContainer scroll-trigger animate--slide-in" style="--animation-order: 1; {% if blockOrder == false %}order: 1;{% endif %}">{{ block.settings.text }}</div>
+                    
+                </div>
+            
+            {% endif %}
+        
+        {% endfor %}
+    
+    </div>
 </div>
-
 
 {% schema %}
 {
     "name": "Image and text",
+    "settings": [
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
+        }
+    ],
     "blocks": [
         {
             "name": "Image Plus Text",
