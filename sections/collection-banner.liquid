@@ -4,9 +4,9 @@
     
 {% liquid 
 
-    assign imageAspectRatio = section.settings.bannerImageAspectRatio
-    assign buttonText = section.settings.bannerButtonText
-    assign buttonBackground = section.settings.bannerButtonColor
+    assign imageAspectRatio = section.settings.image_aspect_ratio
+    assign buttonText = section.settings.button_text
+    assign buttonBackground = section.settings.button_color
     assign overlay = section.settings.overlay
 
     if selectedCollection != blank
@@ -18,10 +18,10 @@
 
     else
         
-        assign featuredImage = section.settings.bannerImage
-        assign url = section.settings.bannerURL
-        assign title = section.settings.bannerHeading
-        assign description = section.settings.bannerDescription
+        assign featuredImage = section.settings.image
+        assign url = section.settings.url
+        assign title = section.settings.heading
+        assign description = section.settings.description
 
     endif
 
@@ -82,7 +82,7 @@
             "label": "Pick collection"
         },
         {
-            "id": "bannerImageAspectRatio",
+            "id": "image_aspect_ratio",
             "type": "checkbox",
             "label": "Keep image aspect ratio?",
             "default": true,
@@ -100,13 +100,13 @@
             "content": "button"
         },
         {
-            "id": "bannerButtonText",
+            "id": "button_text",
             "type": "text",
             "label": "Text",
             "default": "See collection"
         },
         {
-            "id": "bannerButtonColor",
+            "id": "button_color",
             "type": "color",
             "label": "Color",
             "default": "#008000"
@@ -122,12 +122,12 @@
             "content": "Custom image and text"
         },
         {
-            "id": "bannerURL",
+            "id": "url",
             "type": "url",
             "label": "URL"
         },
         {
-            "id": "bannerImage",
+            "id": "image",
             "type": "image_picker",
             "label": "Image"
         },
@@ -136,13 +136,13 @@
             "content": "Text"
         },
         {
-            "id": "bannerHeading",
+            "id": "heading",
             "type": "text",
             "label": "Heading",
             "default": "Your amazing collection"
         },
         {
-            "id": "bannerDescription",
+            "id": "description",
             "type": "richtext",
             "label": "Text",
             "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor auctor purus, sit amet aliquet diam convallis id. Fusce scelerisque ne</p>"
