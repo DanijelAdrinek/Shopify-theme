@@ -5,6 +5,8 @@ This theme is a clone of the Dawn shopify theme, to which 3 sections, 1 snippet,
 
 **Do keep in mind that I am not a designer, the project is focused on showing off my coding skills, not my designer skills**
 
+
+
 # 💻 My sections
 
 | Syntax | Description | File |
@@ -16,11 +18,15 @@ This theme is a clone of the Dawn shopify theme, to which 3 sections, 1 snippet,
 
 ### The css files have same names as the liquid files, with the exception of the base.css file which contains the css code I wanted to be available globally
 
+
+
 # 👀 Sneak peek
 
 ![Text on left, video on right, Shopify Custom video section](./assets/Video%20section.png)
 
 **All sections were made with responsive design in mind and were coded with mobile first appraoch in mind**
+
+
 
 # 🛑 Built on
 
