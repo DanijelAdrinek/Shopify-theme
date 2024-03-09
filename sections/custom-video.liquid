@@ -1,0 +1,114 @@
+{{ 'custom-video.css' | asset_url | stylesheet_tag }}
+
+{% liquid 
+    assign videoUrl = section.settings.video_url
+    assign video_id = videoUrl.id
+    assign heading = section.settings.heading
+    assign videoDescriptionMobile = section.settings.description_mobile
+    assign videoDescriptionDesktop = section.settings.description_desktop
+    assign autoplay = section.settings.enable_video_autoplay
+%}
+
+
+<div class="custom_video--contentContainer color-{{ section.settings.color_scheme }}">
+
+    <div class="custom_video--textContainer">
+        <h1 class="custom_video--videoTitle scroll-trigger animate--slide-in" style="--animation-order: 1;">{{ heading | escape }}</h1>
+        <div class="custom_video--videoDescription not_tablet not_desktop scroll-trigger animate--slide-in" style="--animation-order: 2;">{{ videoDescriptionMobile }}</div>
+        <div class="custom_video--videoDescription not_mobile scroll-trigger animate--slide-in" style="--animation-order: 2;">{{ videoDescriptionDesktop }}</div>
+    </div>
+
+    <div class="custom_video--videoContainer">
+        {%- if videoUrl != null -%}
+            {%- liquid
+              assign loop = ''
+              if section.settings.enable_video_looping
+                assign loop = '&loop=1&playlist=' | append: video_id
+              endif
+            -%}
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&{%- if autoplay -%}autoplay=1{% endif %}{{ loop }}"
+                class="js-youtube scroll-trigger animate--slide-in"
+                style="--animation-order: 3;"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            {%- else -%}
+              <iframe
+                src="https://player.vimeo.com/video/{{ video_id }}?{%- if autoplay -%}autoplay=1{% endif %}{{ loop }}"
+                class="js-vimeo scroll-trigger animate--slide-in"
+                style="--animation-order: 3;"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            {%- endif -%}
+        {%- endif -%}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Custom Video",
+    "settings": [
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
+        },
+        {
+            "type": "header",
+            "content": "Video"
+        },
+        {
+            "type": "video_url",
+            "id": "video_url",
+            "accept": [
+              "youtube",
+              "vimeo"
+            ],
+            "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "label": "t:sections.video.settings.video_url.label",
+            "info": "Use a YouTube or Vimeo URL, and make sure the video is of 16/9 aspect ratio"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_video_looping",
+            "label": "Loop video",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_video_autoplay",
+            "label": "Autoplay video",
+            "default": false
+        },
+        {
+            "type": "header",
+            "content": "Text"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "default": "Video",
+            "label": "Video Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "description_mobile",
+            "label": "Video Description Mobile",
+            "default": "<p>Enter your mobile video description here</p>"
+        },
+        {
+            "type": "richtext",
+            "id": "description_desktop",
+            "label": "Video Description Desktop",
+            "default": "<p>Enter your desktop video description here</p>"
+        }
+    ],
+    "presets": [
+        { "name": "Custom Video" }
+    ]
+}
+{% endschema %}
