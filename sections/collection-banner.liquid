@@ -49,7 +49,7 @@
 
         <div class="banner--textAndButtonContainer">
             {% if title != blank %}
-                <h1 class="banner--header banner--color scroll-trigger animate--slide-in">{{ title }}</h1>
+                <h1 class="banner--header banner--color scroll-trigger animate--slide-in">{{ title | escape }}</h1>
             {% endif %}
 
             {% if description != blank %}
