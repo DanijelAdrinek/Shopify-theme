@@ -9,7 +9,7 @@ This theme is a clone of the Dawn shopify theme, to which 3 sections, 1 snippet,
 
 # 💻 My sections
 
-| Syntax | Description | File |
+| Name | Description | File |
 | ----------- | ----------- | ----------- |
 | Image plus text | Section that allows you to add blocks containing some text and an image | image-plus-text.liquid |
 | Collection banner | Takes a collection and pulls featured image, title, desctiption... from it, also can be added manually | collection-banner.liquid |
